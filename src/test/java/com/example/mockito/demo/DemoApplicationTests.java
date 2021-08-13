@@ -3,7 +3,9 @@ package com.example.mockito.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -82,5 +84,16 @@ class DemoApplicationTests {
 	}
 
 
+	@Test
+	@DisplayName("Testeando con Verify")
+	void testPreguntasExamenVerify(){
+		when(repository.findAll()).thenReturn(Datos.EXAMENES);
+		when(preguntaRepositoryImpl.findPreguntasPorExamenId(anyLong())).thenReturn(Datos.PREGUNTAS);
+		Examen examen = service.findExamenPorNombreConPreguntas("Matemáticas");
+		assertEquals(6, examen.getPreguntas().size());
+		assertTrue(examen.getPreguntas().contains("integrales"));
+		verify(repository).findAll();
+		verify(preguntaRepositoryImpl).findPreguntasPorExamenId(anyLong());
+	}
  
 }
