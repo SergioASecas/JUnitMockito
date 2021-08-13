@@ -31,7 +31,6 @@ public class ExamenServiceImpl implements ExamenService{
 
     @Override
     public Optional<Examen> findExamenporNombre(String nombre) {
-        System.out.println(examenRepository.findAll());
         return examenRepository.findAll()
                 .stream()
                 .filter(e->e.getNombre().contains(nombre))

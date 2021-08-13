@@ -23,5 +23,10 @@ public class PreguntaRepositoryImpl implements PreguntaRepository{
         System.out.println("PreguntasRepositoryImpl.guardarVarias");
         
     }
+
+    @Override
+    public List<String> findAllQuestions() {
+        return Datos.PREGUNTAS;
+    }
     
 }
